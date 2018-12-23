@@ -1,0 +1,35 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Книжный магазин</title>
+</head>
+<body>
+    <div>
+        <h3>Просмотр роли</h3>
+        <table>
+
+            @foreach (var b in ViewBag.Countries)
+            {
+                <tr>
+                    <td><p>@b</p></td>
+
+                   
+
+                </tr>
+
+            }
+        </table>
+    </div>
+    <p>
+        <a href="/Home/CREATE">Создать</a>
+        <a href="/Home/UPDATE">Изменить</a>
+        <a href="/Home/DELETE">Удалить</a>
+
+</body>
+</html>

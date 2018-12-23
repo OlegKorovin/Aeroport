@@ -1,0 +1,153 @@
+﻿@model BookStore.Models.ROLE
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>Удаление</h2>
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial;
+        }
+
+        /* Style the tab */
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+            /* Style the buttons inside the tab */
+            .tab button {
+                background-color: inherit;
+                float: left;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                padding: 14px 16px;
+                transition: 0.3s;
+                font-size: 17px;
+            }
+
+                /* Change background color of buttons on hover */
+                .tab button:hover {
+                    background-color: #ddd;
+                }
+
+                /* Create an active/current tablink class */
+                .tab button.active {
+                    background-color: #ccc;
+                }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+    </style>
+    <title>Создание роли</title>
+</head>
+<body>
+    <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'ROLE')">Удаление роли</button>
+        <button class="tablinks" onclick="openCity(event, 'PROFILE')">Удаление профиля</button>
+        <button class="tablinks" onclick="openCity(event, 'USER')">Удаление пользовотеля</button>
+    </div>
+
+    <div id="ROLE" class="tabcontent">
+        <h3>Форма Удаление роли</h3>
+        <form method="post" action="">
+            <input type="hidden" value="@ViewBag.ROLE" />
+            <select name="Id">
+
+                @foreach (var b in ViewBag.ROLE)
+                {
+                    <option value=@b.Id>@b.NAME</option>
+                }
+            </select>
+            <input type="submit" value="Удалить" />
+        </form>
+    </div>
+
+    <div id="PROFILE" class="tabcontent">
+        <h3>Форма Удаление профиля</h3>
+        <form method="post" action="">
+            <input type="hidden" value="@ViewBag.USER_PROFILE" />
+            <select name="PROFILE">
+                @{List<string> profiles = new List<string>();
+                    List<int> id = new List<int>();
+                }
+                @foreach (var b in ViewBag.USER_PROFILE)
+                {
+                    if (profiles.Contains(b.PROFILE) == false)
+                    {
+                        profiles.Add(b.PROFILE);
+                        id.Add(b.Id);
+                    }
+                }
+                @for (int i = 0; i < profiles.Count; i++)
+                {
+                    <option value="@profiles[i]">@profiles[i]</option>
+                }
+            </select>
+              <input type="submit" value="Удалить" />
+     
+        </form>
+    </div>
+
+    <div id="USER" class="tabcontent">
+        <h3>Форма Удаление пользователя</h3>
+        <form method="post" action="">
+            <input type="hidden" value="@ViewBag.User" />
+            <select name="login">
+                @{List<string> Login = new List<string>();
+                }
+                @foreach (var b in ViewBag.User)
+                {
+                    if (Login.Contains(b.login) == false)
+                    {
+                        Login.Add(b.login);
+
+                    }
+                }
+                @for (int i = 0; i < Login.Count; i++)
+                {
+                    <option value="@Login[i]">@Login[i]</option>
+                }
+            </select>
+            <input type="submit" value="Удалить" />
+        </form>
+    </div>
+
+    <script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+    </script>
+
+    <a href="/Home/Index">Назад</a>
+</body>
+</html>
